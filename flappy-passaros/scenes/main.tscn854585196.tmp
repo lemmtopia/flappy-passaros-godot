@@ -17,6 +17,36 @@
 script = ExtResource("1_jyhfs")
 tree_scene = ExtResource("3_sugp2")
 
+[node name="Bg1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(320, 180)
+texture = ExtResource("1_o5qli")
+
+[node name="Bg2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(320, 180)
+texture = ExtResource("4_ya4ey")
+
+[node name="Bg4" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(320, 180)
+texture = ExtResource("6_trceg")
+
+[node name="Bg5" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(320, 180)
+texture = ExtResource("7_a8y0u")
+
+[node name="Bg6" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(320, 180)
+texture = ExtResource("8_jkv2x")
+
+[node name="Bg7" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(320, 180)
+texture = ExtResource("9_jbj1t")
+
 [node name="Bird" parent="." instance=ExtResource("2_0wfyh")]
 position = Vector2(84, 159)
 
@@ -39,29 +69,8 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -1
-
-[node name="Bg1" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(320, 180)
-texture = ExtResource("1_o5qli")
-
-[node name="Bg2" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(320, 180)
-texture = ExtResource("4_ya4ey")
-
-[node name="Bg4" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(320, 180)
-texture = ExtResource("6_trceg")
-
-[node name="Bg7" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(320, 180)
-texture = ExtResource("9_jbj1t")
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-layer = -1
 script = ExtResource("11_eb6dy")
-layer_speed = 120.0
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(640, 0)
@@ -69,19 +78,5 @@ motion_mirroring = Vector2(640, 0)
 [node name="Bg3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2(320, 180)
 texture = ExtResource("5_eb6dy")
-
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(640, 0)
-
-[node name="Bg5" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
-position = Vector2(320, 180)
-texture = ExtResource("7_a8y0u")
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(640, 0)
-
-[node name="Bg6" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(320, 180)
-texture = ExtResource("8_jkv2x")
 
 [connection signal="timeout" from="TreeTimer" to="." method="_on_tree_timer_timeout"]
