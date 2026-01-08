@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://drj4nx4oik8dp"]
+[gd_scene load_steps=9 format=3 uid="uid://drj4nx4oik8dp"]
 
 [ext_resource type="Script" uid="uid://beojaoac14p1u" path="res://scripts/bird.gd" id="1_3po83"]
 [ext_resource type="Texture2D" uid="uid://1w1x2ellueaf" path="res://assets/sprites/arara_strip3.png" id="1_kqhkv"]
@@ -33,13 +33,16 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kqhkv"]
+radius = 8.062258
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3po83"]
 radius = 12.0415945
 
 [node name="Bird" type="CharacterBody2D"]
 script = ExtResource("1_3po83")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-35, -30)
+position = Vector2(-35, -32)
 sprite_frames = SubResource("SpriteFrames_b7mtg")
 animation = &"fly"
 autoplay = "fly"
@@ -53,4 +56,6 @@ shape = SubResource("CircleShape2D_kqhkv")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_kqhkv")
+shape = SubResource("CircleShape2D_3po83")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -12,7 +12,7 @@ size = Vector2(17, 286)
 [node name="Tree" type="Node2D" groups=["trees"]]
 script = ExtResource("1_vplca")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["trees"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 texture = ExtResource("1_avsvi")
@@ -28,4 +28,4 @@ shape = SubResource("RectangleShape2D_vplca")
 position = Vector2(98, -135)
 shape = SubResource("RectangleShape2D_avsvi")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
