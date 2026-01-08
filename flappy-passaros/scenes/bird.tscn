@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://drj4nx4oik8dp"]
+
+[ext_resource type="Script" uid="uid://beojaoac14p1u" path="res://scripts/bird.gd" id="1_3po83"]
+[ext_resource type="Texture2D" uid="uid://1w1x2ellueaf" path="res://assets/sprites/arara_strip3.png" id="1_kqhkv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3po83"]
+atlas = ExtResource("1_kqhkv")
+region = Rect2(0, 0, 69, 59)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hq4t0"]
+atlas = ExtResource("1_kqhkv")
+region = Rect2(69, 0, 69, 59)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twsrt"]
+atlas = ExtResource("1_kqhkv")
+region = Rect2(138, 0, 69, 59)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b7mtg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3po83")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hq4t0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twsrt")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kqhkv"]
+radius = 12.0415945
+
+[node name="Bird" type="CharacterBody2D"]
+script = ExtResource("1_3po83")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-35, -30)
+sprite_frames = SubResource("SpriteFrames_b7mtg")
+animation = &"fly"
+autoplay = "fly"
+frame = 2
+frame_progress = 0.24118546
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kqhkv")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_kqhkv")
