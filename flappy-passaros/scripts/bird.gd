@@ -16,6 +16,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("flap") and can_control:
 		velocity.y = flap_speed
 	
+	if position.y < -32 or position.y > 360 + 32:
+		game_over()
+	
 	move_and_slide()
 
 func game_over():

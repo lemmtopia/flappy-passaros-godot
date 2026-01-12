@@ -91,9 +91,5 @@ motion_mirroring = Vector2(640, 0)
 position = Vector2(320, 180)
 texture = ExtResource("8_jkv2x")
 
-[node name="GameOverTimer" type="Timer" parent="."]
-wait_time = 2.0
-
 [connection signal="timeout" from="TreeTimer" to="." method="_on_tree_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
-[connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]

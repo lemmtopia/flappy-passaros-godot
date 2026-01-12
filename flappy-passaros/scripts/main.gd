@@ -3,7 +3,6 @@ extends Node2D
 @export var tree_scene : PackedScene
 @export var enemy_scene : PackedScene
 @export var game_over_layer_scene : PackedScene
-@onready var game_over_timer: Timer = $GameOverTimer
 
 @onready var tree_timer : Timer = $TreeTimer
 @onready var enemy_timer : Timer = $EnemyTimer
@@ -33,9 +32,9 @@ func game_over():
 	enemy_timer.stop()
 	
 	var game_over_layer = game_over_layer_scene.instantiate()
+	game_over_layer.connect("restart_game", _on_game_over_layer_restart_game)
 	add_child(game_over_layer)
 	
-	game_over_timer.start()
 	is_game_over = true
 
 func _on_tree_bird_detected():
@@ -48,5 +47,5 @@ func _on_enemy_timer_timeout() -> void:
 	enemy.position.y = randf_range(50, 120)
 	add_child(enemy)
 
-func _on_game_over_timer_timeout() -> void:
+func _on_game_over_layer_restart_game():
 	get_tree().call_deferred("reload_current_scene")
