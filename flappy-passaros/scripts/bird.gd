@@ -20,7 +20,6 @@ func _physics_process(delta: float) -> void:
 
 func game_over():
 	can_control = false
-	$RestartTimer.start()
 	call_deferred("defeated_behaviour")
 	emit_signal("hit")
 
@@ -31,6 +30,3 @@ func defeated_behaviour():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("trees"):
 		game_over()
-
-func _on_restart_timer_timeout() -> void:
-	get_tree().call_deferred("reload_current_scene")

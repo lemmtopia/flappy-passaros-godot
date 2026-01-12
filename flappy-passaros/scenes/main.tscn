@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dleperlmvhx3m"]
+[gd_scene load_steps=15 format=3 uid="uid://dleperlmvhx3m"]
 
 [ext_resource type="Script" uid="uid://bbj8w8en27o3o" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://bxonuyw8a00o6" path="res://assets/sprites/bg1.png" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://drj4nx4oik8dp" path="res://scenes/bird.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://b110i6h11pi3d" path="res://scenes/tree.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cbcvrh6lnagh4" path="res://scenes/game_over_layer.tscn" id="4_a8y0u"]
 [ext_resource type="Texture2D" uid="uid://cttlmmftc2x6a" path="res://assets/sprites/bg2 - lua.png" id="4_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://dicae45qo5bga" path="res://assets/sprites/bg3 - arvores.png" id="5_eb6dy"]
 [ext_resource type="FontFile" uid="uid://bs8eyt3xxuy1f" path="res://assets/IHATCS__.TTF" id="5_tbgi4"]
@@ -18,6 +19,7 @@
 script = ExtResource("1_jyhfs")
 tree_scene = ExtResource("3_sugp2")
 enemy_scene = ExtResource("13_trceg")
+game_over_layer_scene = ExtResource("4_a8y0u")
 
 [node name="Bird" parent="." instance=ExtResource("2_0wfyh")]
 position = Vector2(84, 159)
@@ -89,5 +91,9 @@ motion_mirroring = Vector2(640, 0)
 position = Vector2(320, 180)
 texture = ExtResource("8_jkv2x")
 
+[node name="GameOverTimer" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="timeout" from="TreeTimer" to="." method="_on_tree_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
