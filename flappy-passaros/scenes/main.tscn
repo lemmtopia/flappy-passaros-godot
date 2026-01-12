@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dleperlmvhx3m"]
+[gd_scene load_steps=16 format=3 uid="uid://dleperlmvhx3m"]
 
 [ext_resource type="Script" uid="uid://bbj8w8en27o3o" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://bxonuyw8a00o6" path="res://assets/sprites/bg1.png" id="1_o5qli"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://71nfp4yws4qx" path="res://assets/sprites/bg6 - reflexo da lua.png" id="9_jbj1t"]
 [ext_resource type="Script" uid="uid://brofsr87c6yhc" path="res://scripts/parallax_background.gd" id="11_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://b7u8cm62as10j" path="res://scenes/enemy.tscn" id="13_trceg"]
+[ext_resource type="PackedScene" uid="uid://c61ngvdex8etf" path="res://scenes/start_menu_layer.tscn" id="15_jkv2x"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jyhfs")
@@ -25,7 +26,6 @@ game_over_layer_scene = ExtResource("4_a8y0u")
 position = Vector2(84, 159)
 
 [node name="TreeTimer" type="Timer" parent="."]
-autostart = true
 
 [node name="EnemyTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -91,5 +91,9 @@ motion_mirroring = Vector2(640, 0)
 position = Vector2(320, 180)
 texture = ExtResource("8_jkv2x")
 
+[node name="StartMenuLayer" parent="." instance=ExtResource("15_jkv2x")]
+
+[connection signal="start_game" from="." to="." method="_on_start_game"]
 [connection signal="timeout" from="TreeTimer" to="." method="_on_tree_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="start_game" from="StartMenuLayer" to="." method="_on_start_menu_layer_start_game"]

@@ -1,5 +1,7 @@
 extends Node2D
 
+signal start_game
+
 @export var tree_scene : PackedScene
 @export var enemy_scene : PackedScene
 @export var game_over_layer_scene : PackedScene
@@ -11,11 +13,10 @@ extends Node2D
 
 var score : int = 0
 
-var is_game_over : bool
+var is_game_over : bool = false
+var is_start_game : bool = false
 
 func _ready():
-	tree_timer.start()
-	enemy_timer.start()
 	bird.connect("hit", game_over)
 
 func _on_tree_timer_timeout() -> void:
@@ -49,3 +50,12 @@ func _on_enemy_timer_timeout() -> void:
 
 func _on_game_over_layer_restart_game():
 	get_tree().call_deferred("reload_current_scene")
+
+func _on_start_game():
+	tree_timer.start()
+	enemy_timer.start()
+	
+	is_start_game = true
+
+func _on_start_menu_layer_start_game() -> void:
+	start_game.emit()
