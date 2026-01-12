@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://dleperlmvhx3m"]
+[gd_scene load_steps=20 format=3 uid="uid://dleperlmvhx3m"]
 
 [ext_resource type="Script" uid="uid://bbj8w8en27o3o" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://bxonuyw8a00o6" path="res://assets/sprites/bg1.png" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://drj4nx4oik8dp" path="res://scenes/bird.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://b110i6h11pi3d" path="res://scenes/tree.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cbcvrh6lnagh4" path="res://scenes/game_over_layer.tscn" id="4_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://cgtcmvevaocdi" path="res://scenes/pickup.tscn" id="4_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://cttlmmftc2x6a" path="res://assets/sprites/bg2 - lua.png" id="4_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://dicae45qo5bga" path="res://assets/sprites/bg3 - arvores.png" id="5_eb6dy"]
 [ext_resource type="FontFile" uid="uid://bs8eyt3xxuy1f" path="res://assets/IHATCS__.TTF" id="5_tbgi4"]
@@ -15,11 +16,15 @@
 [ext_resource type="Script" uid="uid://brofsr87c6yhc" path="res://scripts/parallax_background.gd" id="11_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://b7u8cm62as10j" path="res://scenes/enemy.tscn" id="13_trceg"]
 [ext_resource type="PackedScene" uid="uid://c61ngvdex8etf" path="res://scenes/start_menu_layer.tscn" id="15_jkv2x"]
+[ext_resource type="AudioStream" uid="uid://ctb45nytnuhtw" path="res://assets/sons/The Forest and the Trees.mp3" id="17_muem4"]
+[ext_resource type="AudioStream" uid="uid://ndr4d28sfy7i" path="res://assets/sons/game_over_sound.mp3" id="18_0ld40"]
+[ext_resource type="AudioStream" uid="uid://cipl3l80iycoa" path="res://assets/sons/Pickup.wav" id="19_gqmmt"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jyhfs")
 tree_scene = ExtResource("3_sugp2")
 enemy_scene = ExtResource("13_trceg")
+pickup_scene = ExtResource("4_jbj1t")
 game_over_layer_scene = ExtResource("4_a8y0u")
 
 [node name="Bird" parent="." instance=ExtResource("2_0wfyh")]
@@ -30,7 +35,11 @@ position = Vector2(84, 159)
 [node name="EnemyTimer" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="PickupTimer" type="Timer" parent="."]
+wait_time = 5.0
+
 [node name="ScoreLabel" type="Label" parent="."]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -93,7 +102,21 @@ texture = ExtResource("8_jkv2x")
 
 [node name="StartMenuLayer" parent="." instance=ExtResource("15_jkv2x")]
 
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_muem4")
+volume_db = -20.0
+autoplay = true
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_0ld40")
+volume_db = -20.0
+
+[node name="PickupSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_gqmmt")
+volume_db = -20.0
+
 [connection signal="start_game" from="." to="." method="_on_start_game"]
 [connection signal="timeout" from="TreeTimer" to="." method="_on_tree_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="timeout" from="PickupTimer" to="." method="_on_pickup_timer_timeout"]
 [connection signal="start_game" from="StartMenuLayer" to="." method="_on_start_menu_layer_start_game"]

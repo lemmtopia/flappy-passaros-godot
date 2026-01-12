@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgtcmvevaocdi"]
+
+[ext_resource type="Script" uid="uid://ciiffl6xj252i" path="res://scripts/pickup.gd" id="1_7cqbe"]
+[ext_resource type="Texture2D" uid="uid://1ochfc765xe3" path="res://assets/sprites/coletavel.png" id="1_pg2rt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7cqbe"]
+size = Vector2(60, 46)
+
+[node name="Pickup" type="Area2D" groups=["pickups"]]
+collision_layer = 4
+script = ExtResource("1_7cqbe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_pg2rt")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7cqbe")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

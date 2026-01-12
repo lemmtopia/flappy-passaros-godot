@@ -4,12 +4,17 @@ signal start_game
 
 @export var tree_scene : PackedScene
 @export var enemy_scene : PackedScene
+@export var pickup_scene : PackedScene
 @export var game_over_layer_scene : PackedScene
 
 @onready var tree_timer : Timer = $TreeTimer
 @onready var enemy_timer : Timer = $EnemyTimer
+@onready var pickup_timer: Timer = $PickupTimer
 @onready var bird : CharacterBody2D = $Bird
 @onready var score_label : Label = $ScoreLabel
+@onready var music: AudioStreamPlayer = $Music
+@onready var game_over_sound: AudioStreamPlayer = $GameOverSound
+@onready var pickup_sound: AudioStreamPlayer = $PickupSound
 
 var score : int = 0
 
@@ -31,6 +36,9 @@ func game_over():
 	
 	tree_timer.stop()
 	enemy_timer.stop()
+	
+	music.stop()
+	game_over_sound.play()
 	
 	var game_over_layer = game_over_layer_scene.instantiate()
 	game_over_layer.connect("restart_game", _on_game_over_layer_restart_game)
@@ -54,8 +62,23 @@ func _on_game_over_layer_restart_game():
 func _on_start_game():
 	tree_timer.start()
 	enemy_timer.start()
+	pickup_timer.start()
+	
+	score_label.show()
 	
 	is_start_game = true
 
 func _on_start_menu_layer_start_game() -> void:
 	start_game.emit()
+
+func _on_pickup_timer_timeout() -> void:
+	var pickup = pickup_scene.instantiate()
+	pickup.position.x = 710
+	pickup.position.y = randf_range(50, 120)
+	pickup.connect("collect", _on_pickup_collect)
+	add_child(pickup)
+
+func _on_pickup_collect():
+	score += 10
+	score_label.text = str(score)
+	pickup_sound.play()
